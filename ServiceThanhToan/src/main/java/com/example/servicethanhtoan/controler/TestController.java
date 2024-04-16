@@ -1,14 +1,14 @@
-package com.example.servicelogin.controller;
+package com.example.servicethanhtoan.controler;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
-public class LoginController {
+@RequestMapping("/thanhtoan")
+public class TestController {
     @GetMapping("")
-    public String login(){
-        return "Login service";
+    public String testGateway() {
+        return "thanh toan da thong";
     }
 }
