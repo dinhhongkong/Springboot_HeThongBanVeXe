@@ -1,17 +1,22 @@
 package com.example.sevicedatve.dto;
 
-import com.example.sevicedatve.entity.QuanLy;
-import com.example.sevicedatve.entity.TinhThanhPho;
-import com.example.sevicedatve.entity.Xe;
+import com.example.sevicedatve.entity.*;
+import jakarta.persistence.Column;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
 @Component
 public class ChuyenXeDTO {
     private int id;
 
-    private Date thoiGianKhoiHanh;
+    private String ngayKhoiHanh;
+
+    private String gioXuatPhat;
+
+    private float thoiGianDuKien;
 
     private double gia;
 
@@ -29,12 +34,18 @@ public class ChuyenXeDTO {
 
     private String tenTinhDen;
 
+    private Set<VeXe> listVeXe;
+
+    private Set<String> listMaGhe;
+
     public ChuyenXeDTO() {
     }
 
-    public ChuyenXeDTO(int id, Date thoiGianKhoiHanh, double gia, int idQuanLy, String hoTenQuanLy, int idXe, int maTinhDi, String tenTinhDi, int maTinhDen, String tenTinhDen) {
+    public ChuyenXeDTO(int id, String ngayKhoiHanh, String gioXuatPhat, float thoiGianDuKien, double gia, int idQuanLy, String hoTenQuanLy, int idXe, int maTinhDi, String tenTinhDi, int maTinhDen, String tenTinhDen) {
         this.id = id;
-        this.thoiGianKhoiHanh = thoiGianKhoiHanh;
+        this.ngayKhoiHanh = ngayKhoiHanh;
+        this.gioXuatPhat = gioXuatPhat;
+        this.thoiGianDuKien = thoiGianDuKien;
         this.gia = gia;
         this.idQuanLy = idQuanLy;
         this.hoTenQuanLy = hoTenQuanLy;
@@ -53,12 +64,28 @@ public class ChuyenXeDTO {
         this.id = id;
     }
 
-    public Date getThoiGianKhoiHanh() {
-        return thoiGianKhoiHanh;
+    public String getNgayKhoiHanh() {
+        return ngayKhoiHanh;
     }
 
-    public void setThoiGianKhoiHanh(Date thoiGianKhoiHanh) {
-        this.thoiGianKhoiHanh = thoiGianKhoiHanh;
+    public void setNgayKhoiHanh(String ngayKhoiHanh) {
+        this.ngayKhoiHanh = ngayKhoiHanh;
+    }
+
+    public String getGioXuatPhat() {
+        return gioXuatPhat;
+    }
+
+    public void setGioXuatPhat(String gioXuatPhat) {
+        this.gioXuatPhat = gioXuatPhat;
+    }
+
+    public float getThoiGianDuKien() {
+        return thoiGianDuKien;
+    }
+
+    public void setThoiGianDuKien(float thoiGianDuKien) {
+        this.thoiGianDuKien = thoiGianDuKien;
     }
 
     public double getGia() {
@@ -101,14 +128,6 @@ public class ChuyenXeDTO {
         this.maTinhDi = maTinhDi;
     }
 
-    public int getMaTinhDen() {
-        return maTinhDen;
-    }
-
-    public void setMaTinhDen(int maTinhDen) {
-        this.maTinhDen = maTinhDen;
-    }
-
     public String getTenTinhDi() {
         return tenTinhDi;
     }
@@ -117,11 +136,35 @@ public class ChuyenXeDTO {
         this.tenTinhDi = tenTinhDi;
     }
 
+    public int getMaTinhDen() {
+        return maTinhDen;
+    }
+
+    public void setMaTinhDen(int maTinhDen) {
+        this.maTinhDen = maTinhDen;
+    }
+
     public String getTenTinhDen() {
         return tenTinhDen;
     }
 
     public void setTenTinhDen(String tenTinhDen) {
         this.tenTinhDen = tenTinhDen;
+    }
+
+    public Set<VeXe> getListVeXe() {
+        return listVeXe;
+    }
+
+    public void setListVeXe(Set<VeXe> listVeXe) {
+        this.listVeXe = listVeXe;
+    }
+
+    public Set<String> getListMaGhe() {
+        return listMaGhe;
+    }
+
+    public void setListMaGhe(Set<String> listMaGhe) {
+        this.listMaGhe = listMaGhe;
     }
 }

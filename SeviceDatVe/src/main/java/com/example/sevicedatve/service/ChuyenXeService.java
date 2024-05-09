@@ -1,18 +1,13 @@
 package com.example.sevicedatve.service;
 
 import com.example.sevicedatve.dto.ChuyenXeDTO;
-import com.example.sevicedatve.entity.ChuyenXe;
-import com.example.sevicedatve.entity.QuanLy;
-import com.example.sevicedatve.entity.TinhThanhPho;
-import com.example.sevicedatve.entity.Xe;
+import com.example.sevicedatve.entity.*;
 import com.example.sevicedatve.repository.ChuyenXeRepository;
 import com.example.sevicedatve.service.Implement.ChuyenXeImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ChuyenXeService implements ChuyenXeImp {
@@ -24,7 +19,9 @@ public class ChuyenXeService implements ChuyenXeImp {
         for(ChuyenXe data: chuyenXeRepository.findAll()){
             ChuyenXeDTO chuyenXeDTO= new ChuyenXeDTO();
             chuyenXeDTO.setId(data.getId());
-            chuyenXeDTO.setThoiGianKhoiHanh(data.getThoiGianKhoiHanh());
+            chuyenXeDTO.setNgayKhoiHanh(data.getNgayKhoiHanh());
+            chuyenXeDTO.setGioXuatPhat(data.getGioXuatPhat());
+            chuyenXeDTO.setThoiGianDuKien(data.getThoiGianDuKien());
             chuyenXeDTO.setGia(data.getGia());
             chuyenXeDTO.setIdQuanLy(data.getQuanLy().getId());
             chuyenXeDTO.setHoTenQuanLy(data.getQuanLy().getHoTen());
@@ -34,19 +31,49 @@ public class ChuyenXeService implements ChuyenXeImp {
             chuyenXeDTO.setMaTinhDen(data.getTinhDen().getMaTinh());
             chuyenXeDTO.setTenTinhDen(data.getTinhDen().getTenTinh());
             listChuyenXeDTO.add(chuyenXeDTO);
+            System.out.println(data.getNgayKhoiHanh());
         }
         return listChuyenXeDTO;
     }
 
     @Override
-    public boolean insertChuyenXe(Date thoiGianKhoiHanh, double gia, int idQuanLy, int idXe, int maTinhDi, int maTinhDen) {
+    public List<ChuyenXeDTO> getListChuyenXe(int maTinhDi, int maTinhDen, String ngayXuatPhat) {
+        List<ChuyenXeDTO> chuyenXeDTOList= new ArrayList<>();
+
+        TinhThanhPho tinhThanhPhoDi= new TinhThanhPho();
+        tinhThanhPhoDi.setMaTinh(maTinhDi);
+        TinhThanhPho tinhThanhPhoDen= new TinhThanhPho();
+        tinhThanhPhoDen.setMaTinh(maTinhDen);
+
+        List<ChuyenXe> chuyenXeList= chuyenXeRepository.findAllByTinhDiAndTinhDenAndNgayKhoiHanh(tinhThanhPhoDi, tinhThanhPhoDen, ngayXuatPhat);
+
+        for(ChuyenXe chuyenXe: chuyenXeList){
+            ChuyenXeDTO chuyenXeDTO= new ChuyenXeDTO();
+            chuyenXeDTO.setId(chuyenXe.getId());
+            chuyenXeDTO.setGia(chuyenXe.getGia());
+            chuyenXeDTO.setNgayKhoiHanh(chuyenXe.getNgayKhoiHanh());
+            chuyenXeDTO.setGioXuatPhat(chuyenXe.getGioXuatPhat());
+            chuyenXeDTO.setThoiGianDuKien(chuyenXe.getThoiGianDuKien());
+            chuyenXeDTO.setTenTinhDen(chuyenXe.getTinhDen().getTenTinh());
+            chuyenXeDTO.setTenTinhDi(chuyenXe.getTinhDi().getTenTinh());
+            Set<String> listMaGhe= new HashSet<>();
+            for(VeXe veXe: chuyenXe.getListVeXe()){
+                String maGhe= veXe.getMaGhe();
+                listMaGhe.add(maGhe);
+            }
+            chuyenXeDTO.setListMaGhe(listMaGhe);
+            chuyenXeDTOList.add(chuyenXeDTO);
+        }
+        return chuyenXeDTOList;
+    }
+
+
+    @Override
+    public boolean insertChuyenXe(String thoiGianKhoiHanh, double gia, int idQuanLy, int idXe, int maTinhDi, int maTinhDen) {
         boolean isSuccess= true;
         try {
-
-
-
             ChuyenXe chuyenXe= new ChuyenXe();
-            chuyenXe.setThoiGianKhoiHanh(thoiGianKhoiHanh);
+            chuyenXe.setNgayKhoiHanh(thoiGianKhoiHanh);
             chuyenXe.setGia(gia);
 
             QuanLy quanLy= new QuanLy();

@@ -11,8 +11,14 @@ public class ChuyenXe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "thoi_gian_khoi_hanh")
-    private Date thoiGianKhoiHanh;
+    @Column(name = "ngay_khoi_hanh")
+    private String ngayKhoiHanh;
+
+    @Column(name = "gio_xuat_phat")
+    private String gioXuatPhat;
+
+    @Column(name = "thoi_gian_du_kien")
+    private float thoiGianDuKien;
 
     @Column(name = "gia")
     private double gia;
@@ -42,9 +48,9 @@ public class ChuyenXe {
     public ChuyenXe() {
     }
 
-    public ChuyenXe(int id, Date thoiGianKhoiHanh, double gia, QuanLy quanLy, Xe xe, TinhThanhPho tinhDi, TinhThanhPho tinhDen) {
+    public ChuyenXe(int id, String ngayKhoiHanh, double gia, QuanLy quanLy, Xe xe, TinhThanhPho tinhDi, TinhThanhPho tinhDen) {
         this.id = id;
-        this.thoiGianKhoiHanh = thoiGianKhoiHanh;
+        this.ngayKhoiHanh = ngayKhoiHanh;
         this.gia = gia;
         this.quanLy = quanLy;
         this.xe = xe;
@@ -60,12 +66,12 @@ public class ChuyenXe {
         this.id = id;
     }
 
-    public Date getThoiGianKhoiHanh() {
-        return thoiGianKhoiHanh;
+    public String getNgayKhoiHanh() {
+        return ngayKhoiHanh;
     }
 
-    public void setThoiGianKhoiHanh(Date thoiGianKhoiHanh) {
-        this.thoiGianKhoiHanh = thoiGianKhoiHanh;
+    public void setNgayKhoiHanh(String ngayKhoiHanh) {
+        this.ngayKhoiHanh = ngayKhoiHanh;
     }
 
     public double getGia() {
@@ -122,5 +128,21 @@ public class ChuyenXe {
 
     public void setListVeXe(Set<VeXe> listVeXe) {
         this.listVeXe = listVeXe;
+    }
+
+    public String getGioXuatPhat() {
+        return gioXuatPhat;
+    }
+
+    public void setGioXuatPhat(String gioXuatPhat) {
+        this.gioXuatPhat = gioXuatPhat;
+    }
+
+    public float getThoiGianDuKien() {
+        return thoiGianDuKien;
+    }
+
+    public void setThoiGianDuKien(float thoiGianDuKien) {
+        this.thoiGianDuKien = thoiGianDuKien;
     }
 }

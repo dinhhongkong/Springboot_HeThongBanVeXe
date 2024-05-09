@@ -10,5 +10,7 @@ import java.util.List;
 public interface ChuyenXeImp {
     List<ChuyenXeDTO> getAllChuyenXe();
 
-    boolean insertChuyenXe(Date thoiGianKhoiHanh, double gia, int idQuanLy, int idXe, int maTinhDi, int maTinhDen);
+    List<ChuyenXeDTO> getListChuyenXe(int maTinhDi, int maTinhDen, String ngayXuatPhat);
+
+    boolean insertChuyenXe(String ngayKhoiHanh, double gia, int idQuanLy, int idXe, int maTinhDi, int maTinhDen);
 }

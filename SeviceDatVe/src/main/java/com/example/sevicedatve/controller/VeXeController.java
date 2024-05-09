@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/vexe")
 public class VeXeController {
@@ -18,6 +19,15 @@ public class VeXeController {
     @GetMapping("/test")
     public String test(){
         return "Day la trang ve xe";
+    }
+
+    @GetMapping("get-all-ve-xe-by-chuyen-xe")
+    public ResponseEntity<?> getAllVeXeByChuyenXe(@RequestParam int idChuyenXe){
+        RespondData respondData= new RespondData();
+        respondData.setStatus(202);
+        respondData.setMessage("get success");
+        respondData.setData(veXeImp.getAllVeXeByChuyenXe(idChuyenXe));
+        return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
     @PostMapping("insert")
