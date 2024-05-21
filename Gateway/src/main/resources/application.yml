@@ -26,5 +26,4 @@ spring:
         - id: dat-ve-service
           uri: http://localhost:8084
           predicates:
-            - Path=/datve/**
-
+            - Path=/datve/**, /chuyenxe/**, /nvquanly/**, /vexe/**
