@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface ChuyenXeImp {
+
+    ChuyenXe findChuyenXeById(int id);
+
     List<ChuyenXeDTO> getAllChuyenXe();
 
     List<ChuyenXeDTO> getListChuyenXe(int maTinhDi, int maTinhDen, String ngayXuatPhat);

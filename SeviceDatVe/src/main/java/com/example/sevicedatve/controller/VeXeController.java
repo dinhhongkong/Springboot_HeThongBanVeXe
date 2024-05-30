@@ -1,5 +1,6 @@
 package com.example.sevicedatve.controller;
 
+import com.example.sevicedatve.dto.ListMaGheDaDatDTO;
 import com.example.sevicedatve.dto.VeXeRequestDTO;
 import com.example.sevicedatve.entity.VeXe;
 import com.example.sevicedatve.payload.RespondData;
@@ -24,12 +25,24 @@ public class VeXeController {
         return "Day la trang ve xe";
     }
 
-    @GetMapping("/get-all-ve-xe-by-chuyen-xe")
+    @GetMapping("/get-list-ve-da-dat")
     public ResponseEntity<?> getAllVeXeByChuyenXe(@RequestParam int idChuyenXe){
         RespondData respondData= new RespondData();
-        respondData.setStatus(202);
-        respondData.setMessage("get success");
-        respondData.setData(veXeImp.getAllVeXeByChuyenXe(idChuyenXe));
+        ListMaGheDaDatDTO listMaGheDaDatDTO= veXeImp.getAllVeDaDatByIdChuyenXe(idChuyenXe);
+        if(listMaGheDaDatDTO != null){
+            if(listMaGheDaDatDTO.getListMaGheDaDat().isEmpty()){
+                respondData.setStatus(201);
+                respondData.setMessage("Danh sach ghe da dat rong");
+            }else{
+                respondData.setStatus(200);
+                respondData.setMessage("Lay danh sach ghe da dat thanh cong");
+            }
+            respondData.setData(listMaGheDaDatDTO);
+        }else{
+            respondData.setStatus(405);
+            respondData.setMessage("Lay danh sach ghe da dat that bai");
+            respondData.setData(null);
+        }
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
@@ -41,20 +54,6 @@ public class VeXeController {
         respondData.setStatus(200);
         respondData.setData(listIdVeXe);
         respondData.setMessage("insert success");
-        return new ResponseEntity<>(respondData, HttpStatus.OK);
-    }
-
-    @PostMapping("/test/insert")
-    public ResponseEntity<?> insertTest(@RequestParam String name, @RequestParam String phone, @RequestParam String email){
-        RespondData respondData= new RespondData();
-        respondData.setData(veXeImp.insertTest(name, phone, email));
-        return new ResponseEntity<>(respondData ,HttpStatus.OK);
-    }
-
-    @PostMapping("/test")
-    public ResponseEntity<?> test(@RequestParam int id){
-        RespondData respondData= new RespondData();
-        respondData.setData(1);
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 }

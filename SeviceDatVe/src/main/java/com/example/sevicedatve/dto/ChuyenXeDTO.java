@@ -40,6 +40,7 @@ public class ChuyenXeDTO {
 
     private Set<VeXe> listVeXe;
 
+    // List Ve Da Dat
     private Set<String> listMaGhe;
 
     public ChuyenXeDTO() {

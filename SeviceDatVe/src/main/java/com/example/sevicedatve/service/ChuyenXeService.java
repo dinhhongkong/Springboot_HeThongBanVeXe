@@ -13,6 +13,18 @@ import java.util.*;
 public class ChuyenXeService implements ChuyenXeImp {
     @Autowired
     ChuyenXeRepository chuyenXeRepository;
+
+    @Override
+    public ChuyenXe findChuyenXeById(int id) {
+        try{
+            ChuyenXe chuyenXe= chuyenXeRepository.findById(id);
+            if(chuyenXe != null){
+                return chuyenXe;
+            }
+        }catch (Exception e){}
+        return null;
+    }
+
     @Override
     public List<ChuyenXeDTO> getAllChuyenXe() {
         List<ChuyenXeDTO> listChuyenXeDTO= new ArrayList<>();

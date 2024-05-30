@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface ChuyenXeRepository extends JpaRepository<ChuyenXe, Integer> {
     List<ChuyenXe> findAllByTinhDiAndTinhDenAndNgayKhoiHanh(TinhThanhPho tinhDi, TinhThanhPho tinhDen, String ngayXuatPhat);
+    ChuyenXe findById(int id);
 }
