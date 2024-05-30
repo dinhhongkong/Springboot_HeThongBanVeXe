@@ -1,6 +1,6 @@
 package com.example.servicelogin.config;
 
-import com.example.servicelogin.repository.UserRepository;
+import com.example.servicelogin.repository.AccountRepository;
 import com.example.servicelogin.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,22 +22,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class AuthConfig {
 
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+//               .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/auth/register", "/auth/token", "/auth/validate").permitAll()
+                        .requestMatchers("/auth/test","/auth/login", "/auth/register", "/auth/token", "/auth/validate").permitAll()
 //                        .anyRequest().permitAll()
+//                        .anyRequest().authenticated()
                 )
                 .build();
     }
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new CustomUserDetailsService(userRepository);
+        return new CustomUserDetailsService(accountRepository);
     }
 
     @Bean

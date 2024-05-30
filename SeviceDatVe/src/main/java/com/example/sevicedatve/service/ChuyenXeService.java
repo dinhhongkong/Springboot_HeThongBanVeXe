@@ -13,6 +13,18 @@ import java.util.*;
 public class ChuyenXeService implements ChuyenXeImp {
     @Autowired
     ChuyenXeRepository chuyenXeRepository;
+
+    @Override
+    public ChuyenXe findChuyenXeById(int id) {
+        try{
+            ChuyenXe chuyenXe= chuyenXeRepository.findById(id);
+            if(chuyenXe != null){
+                return chuyenXe;
+            }
+        }catch (Exception e){}
+        return null;
+    }
+
     @Override
     public List<ChuyenXeDTO> getAllChuyenXe() {
         List<ChuyenXeDTO> listChuyenXeDTO= new ArrayList<>();
@@ -51,6 +63,7 @@ public class ChuyenXeService implements ChuyenXeImp {
             ChuyenXeDTO chuyenXeDTO= new ChuyenXeDTO();
             chuyenXeDTO.setId(chuyenXe.getId());
             chuyenXeDTO.setGia(chuyenXe.getGia());
+            chuyenXeDTO.setLoaiXe(chuyenXe.getXe().getLoai_xe());
             chuyenXeDTO.setNgayKhoiHanh(chuyenXe.getNgayKhoiHanh());
             chuyenXeDTO.setGioXuatPhat(chuyenXe.getGioXuatPhat());
             chuyenXeDTO.setThoiGianDuKien(chuyenXe.getThoiGianDuKien());
@@ -62,6 +75,9 @@ public class ChuyenXeService implements ChuyenXeImp {
                 listMaGhe.add(maGhe);
             }
             chuyenXeDTO.setListMaGhe(listMaGhe);
+
+            int choTrong= chuyenXe.getXe().getTongSoGhe()- chuyenXe.getListVeXe().size();
+            chuyenXeDTO.setChoTrong(choTrong);
             chuyenXeDTOList.add(chuyenXeDTO);
         }
         return chuyenXeDTOList;
@@ -100,4 +116,6 @@ public class ChuyenXeService implements ChuyenXeImp {
         }
         return false;
     }
+
+
 }

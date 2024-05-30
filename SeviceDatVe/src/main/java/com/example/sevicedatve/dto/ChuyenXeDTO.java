@@ -26,6 +26,10 @@ public class ChuyenXeDTO {
 
     private int idXe;
 
+    private String loaiXe;
+
+    private int choTrong;
+
     private int maTinhDi;
 
     private String tenTinhDi;
@@ -36,12 +40,13 @@ public class ChuyenXeDTO {
 
     private Set<VeXe> listVeXe;
 
+    // List Ve Da Dat
     private Set<String> listMaGhe;
 
     public ChuyenXeDTO() {
     }
 
-    public ChuyenXeDTO(int id, String ngayKhoiHanh, String gioXuatPhat, float thoiGianDuKien, double gia, int idQuanLy, String hoTenQuanLy, int idXe, int maTinhDi, String tenTinhDi, int maTinhDen, String tenTinhDen) {
+    public ChuyenXeDTO(int id, String ngayKhoiHanh, String gioXuatPhat, float thoiGianDuKien, double gia, int idQuanLy, String hoTenQuanLy, int idXe, String loaiXe, int choTrong, int maTinhDi, String tenTinhDi, int maTinhDen, String tenTinhDen, Set<VeXe> listVeXe, Set<String> listMaGhe) {
         this.id = id;
         this.ngayKhoiHanh = ngayKhoiHanh;
         this.gioXuatPhat = gioXuatPhat;
@@ -50,10 +55,30 @@ public class ChuyenXeDTO {
         this.idQuanLy = idQuanLy;
         this.hoTenQuanLy = hoTenQuanLy;
         this.idXe = idXe;
+        this.loaiXe = loaiXe;
+        this.choTrong = choTrong;
         this.maTinhDi = maTinhDi;
         this.tenTinhDi = tenTinhDi;
         this.maTinhDen = maTinhDen;
         this.tenTinhDen = tenTinhDen;
+        this.listVeXe = listVeXe;
+        this.listMaGhe = listMaGhe;
+    }
+
+    public int getChoTrong() {
+        return choTrong;
+    }
+
+    public void setChoTrong(int choTrong) {
+        this.choTrong = choTrong;
+    }
+
+    public String getLoaiXe() {
+        return loaiXe;
+    }
+
+    public void setLoaiXe(String loaiXe) {
+        this.loaiXe = loaiXe;
     }
 
     public int getId() {

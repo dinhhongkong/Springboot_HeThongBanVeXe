@@ -1,6 +1,5 @@
 package com.example.servicelogin.service;
 
-import com.example.servicelogin.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

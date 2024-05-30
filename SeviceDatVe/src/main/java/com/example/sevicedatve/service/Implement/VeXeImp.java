@@ -1,12 +1,12 @@
 package com.example.sevicedatve.service.Implement;
 
-import com.example.sevicedatve.dto.VeXeDTO;
+import com.example.sevicedatve.dto.ListMaGheDaDatDTO;
+import com.example.sevicedatve.dto.VeXeRequestDTO;
 
-import java.util.Date;
 import java.util.List;
 
 public interface VeXeImp {
-    boolean insertVeXe(Date  ngayDat, boolean trangThaiThanhToan, String maGhe, int idKhachHang, int idChuyenXe, int idQuanLy);
+    List<Integer> insertVeXe(VeXeRequestDTO veXeRequestDTO);
 
-    List<VeXeDTO> getAllVeXeByChuyenXe(int idChuyenXe);
+    ListMaGheDaDatDTO getAllVeDaDatByIdChuyenXe(int idChuyenXe);
 }

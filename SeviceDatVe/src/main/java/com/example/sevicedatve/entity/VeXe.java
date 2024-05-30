@@ -32,7 +32,29 @@ public class VeXe {
     @JoinColumn(name = "id_quan_ly")
     private QuanLy quanLy;
 
+    @Column(name = "ho_ten_kh")
+    private String hoTenKH;
+
+    @Column(name = "sdt_kh")
+    private String phoneKH;
+
+    @Column(name = "email_kh")
+    private String emailKH;
+
     public VeXe() {
+    }
+
+    public VeXe(int id, Date ngayDat, boolean trangThaiThanhToan, String maGhe, KhachHang khachHang, ChuyenXe chuyenXe, QuanLy quanLy, String hoTenKH, String phoneKH, String emailKH) {
+        this.id = id;
+        this.ngayDat = ngayDat;
+        this.trangThaiThanhToan = trangThaiThanhToan;
+        this.maGhe = maGhe;
+        this.khachHang = khachHang;
+        this.chuyenXe = chuyenXe;
+        this.quanLy = quanLy;
+        this.hoTenKH = hoTenKH;
+        this.phoneKH = phoneKH;
+        this.emailKH = emailKH;
     }
 
     public int getId() {
@@ -89,5 +111,29 @@ public class VeXe {
 
     public void setQuanLy(QuanLy quanLy) {
         this.quanLy = quanLy;
+    }
+
+    public String getHoTenKH() {
+        return hoTenKH;
+    }
+
+    public void setHoTenKH(String hoTenKH) {
+        this.hoTenKH = hoTenKH;
+    }
+
+    public String getPhoneKH() {
+        return phoneKH;
+    }
+
+    public void setPhoneKH(String phoneKH) {
+        this.phoneKH = phoneKH;
+    }
+
+    public String getEmailKH() {
+        return emailKH;
+    }
+
+    public void setEmailKH(String emailKH) {
+        this.emailKH = emailKH;
     }
 }
