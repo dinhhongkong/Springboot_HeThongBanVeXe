@@ -23,5 +23,5 @@ public class Role {
     private String role;
 
     @OneToMany()
-    private List<User> taiKhoanList;
+    private List<Account> taiKhoanList;
 }

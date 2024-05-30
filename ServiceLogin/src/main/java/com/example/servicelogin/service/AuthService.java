@@ -1,27 +1,30 @@
 package com.example.servicelogin.service;
 
+import com.example.servicelogin.dto.AuthRequest;
+import com.example.servicelogin.entity.Account;
 import com.example.servicelogin.entity.Role;
-import com.example.servicelogin.entity.User;
-import com.example.servicelogin.repository.UserRepository;
+import com.example.servicelogin.repository.AccountRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class AuthService {
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
     private PasswordEncoder passwordEncoder;
     private JwtService jwtService;
 
 
-    public User saveUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(new Role().builder().id(1).build());
-        return userRepository.save(user);
+    public boolean checkLogin(AuthRequest authRequest){
+        Account account = accountRepository.findByUsername(authRequest.getUsername());
+        return  passwordEncoder.matches(authRequest.getPassword(), account.getPassword());
+    }
+
+    public Account saveUser(Account account){
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        account.setRole(new Role().builder().id(1).build());
+        return accountRepository.save(account);
     }
 
     public String generateToken(String username) {

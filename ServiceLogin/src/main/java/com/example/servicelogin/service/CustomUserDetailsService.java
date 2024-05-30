@@ -1,7 +1,7 @@
 package com.example.servicelogin.service;
 
-import com.example.servicelogin.entity.User;
-import com.example.servicelogin.repository.UserRepository;
+import com.example.servicelogin.entity.Account;
+import com.example.servicelogin.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if(user ==null) {
-            throw new UsernameNotFoundException("User Not Found");
+        Account account = accountRepository.findByUsername(username);
+        if(account ==null) {
+            throw new UsernameNotFoundException("Account Not Found");
         }
-        return  user;
+        return account;
     }
 }

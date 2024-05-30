@@ -51,6 +51,7 @@ public class ChuyenXeService implements ChuyenXeImp {
             ChuyenXeDTO chuyenXeDTO= new ChuyenXeDTO();
             chuyenXeDTO.setId(chuyenXe.getId());
             chuyenXeDTO.setGia(chuyenXe.getGia());
+            chuyenXeDTO.setLoaiXe(chuyenXe.getXe().getLoai_xe());
             chuyenXeDTO.setNgayKhoiHanh(chuyenXe.getNgayKhoiHanh());
             chuyenXeDTO.setGioXuatPhat(chuyenXe.getGioXuatPhat());
             chuyenXeDTO.setThoiGianDuKien(chuyenXe.getThoiGianDuKien());
@@ -62,6 +63,9 @@ public class ChuyenXeService implements ChuyenXeImp {
                 listMaGhe.add(maGhe);
             }
             chuyenXeDTO.setListMaGhe(listMaGhe);
+
+            int choTrong= chuyenXe.getXe().getTongSoGhe()- chuyenXe.getListVeXe().size();
+            chuyenXeDTO.setChoTrong(choTrong);
             chuyenXeDTOList.add(chuyenXeDTO);
         }
         return chuyenXeDTOList;
@@ -100,4 +104,6 @@ public class ChuyenXeService implements ChuyenXeImp {
         }
         return false;
     }
+
+
 }
