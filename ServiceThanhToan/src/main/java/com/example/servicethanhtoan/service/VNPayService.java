@@ -4,6 +4,7 @@ import com.example.servicethanhtoan.config.VNPayConfig;
 import com.example.servicethanhtoan.dto.request.PaymentRequest;
 import com.example.servicethanhtoan.entity.VeXe;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.*;
 public class VNPayService {
 
     private final VeXeService veXeService;
+    private final SmsService smsService;
 
     public String createOrder(int total, String orderInfor, String urlReturn){
         String vnp_Version = "2.1.0";
@@ -83,7 +85,7 @@ public class VNPayService {
         String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
         return paymentUrl;
     }
-
+    @Transactional
     public int orderReturn(HttpServletRequest request){
         Map fields = new HashMap();
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
@@ -102,7 +104,26 @@ public class VNPayService {
         String signValue = VNPayConfig.hashAllFields(fields);
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                System.out.println("thanh toán thành công");
+
+                String contentPayment = request.getParameter("vnp_OrderInfo");
+                var ticketIdList = getContentPayment(contentPayment);
+                String phoneNumber = "";
+                String ngayKhoiHang = "";
+                String gioKhoiHanh ="";
+                for (Integer ticketId: ticketIdList ) {
+                    VeXe veXe = veXeService.findById(ticketId);
+                    veXe.setTransactionId(request.getParameter("vnp_TransactionNo"));
+                    veXe.setTrangThaiThanhToan(1);
+                    veXe.setPaymentMethod("VNPAY");
+                    phoneNumber = veXe.getPhoneNumber();
+                    ngayKhoiHang = veXe.getChuyenXe().getNgayKhoiHanh();
+                    gioKhoiHanh = veXe.getChuyenXe().getGioXuatPhat();
+                    veXeService.save(veXe);
+                }
+                smsService.sendSms(phoneNumber,ticketIdList, ngayKhoiHang, gioKhoiHanh);
+
+
+
                 return 1;
             } else {
                 return 0;
@@ -110,6 +131,23 @@ public class VNPayService {
         } else {
             return -1;
         }
+    }
+
+    private List<Integer> getContentPayment(String content) {
+        List<Integer> resultList = new ArrayList<>();
+        String[] strArray = content.split(" ");
+
+        for (String s : strArray) {
+            try {
+                int number = Integer.parseInt(s);
+                resultList.add(number);
+            } catch (NumberFormatException e) {
+                System.out.println("Có lỗi khi chuyển đổi chuỗi: " + s);
+            }
+        }
+
+        return resultList;
+
     }
 
 }

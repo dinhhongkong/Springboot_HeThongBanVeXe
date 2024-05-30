@@ -5,13 +5,14 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 @Service
 public class SmsService {
-    public boolean sendSms(String phoneNumber) {
+    public boolean sendSms(String phoneNumber, List<Integer> ticketId, String departureDay, String departureTime) {
         boolean status = false;
         try {
-            String sms = "'xin chao kien, ma ve cua ban la 18283, khoi hanh luc 8h30'";
+            String sms = "'xin chao quy khach, ma ve cua ban la "+ticketId.toString()+" , khoi hanh luc "+ departureTime + " ngay " + departureDay+" '";
             String cmd = "adb shell service call isms 5 i32 1 s16 \"com.android.mms.service\" s16 \"null\" s16 \""+phoneNumber+"\" s16 \"+84980200030\" s16 \""+sms+"\" s16 \"null\" s16 \"null\" s16 \"null\" s16 \"null\"";
             ProcessBuilder pb = new ProcessBuilder("cmd", "/c",cmd);
             Process process = pb.start();

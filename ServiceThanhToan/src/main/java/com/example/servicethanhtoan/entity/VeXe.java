@@ -22,9 +22,20 @@ public class VeXe {
     private String ngayDat;
 
     @Column(name = "trang_thai_thanh_toan")
-    private boolean trangThaiThanhToan;
+    private int trangThaiThanhToan;
 
+    @Column(name = "transaction_id")
     private String transactionId;
+
+    @Column(name = "sdt_kh")
+    private String phoneNumber;
+
+    @Column(name = "payment_method")
+    private String paymentMethod;
+
+    @ManyToOne
+    @JoinColumn(name = "id_chuyen_xe")
+    private ChuyenXe chuyenXe;
 
 
 }
