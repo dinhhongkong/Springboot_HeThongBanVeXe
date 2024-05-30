@@ -1,4 +1,4 @@
-package com.example.servicethanhtoan.dto.response;
+package com.example.servicethanhtoan.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentResponse {
+public class PaymentRequest {
     private int paymentStatus;
     private String orderInfo;
     private String totalPrice;
