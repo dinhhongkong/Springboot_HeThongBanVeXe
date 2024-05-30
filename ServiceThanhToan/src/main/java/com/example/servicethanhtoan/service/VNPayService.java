@@ -1,7 +1,10 @@
 package com.example.servicethanhtoan.service;
 
 import com.example.servicethanhtoan.config.VNPayConfig;
+import com.example.servicethanhtoan.dto.request.PaymentRequest;
+import com.example.servicethanhtoan.entity.VeXe;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -11,7 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class VNPayService {
+
+    private final VeXeService veXeService;
 
     public String createOrder(int total, String orderInfor, String urlReturn){
         String vnp_Version = "2.1.0";
@@ -96,6 +102,7 @@ public class VNPayService {
         String signValue = VNPayConfig.hashAllFields(fields);
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
+                System.out.println("thanh toán thành công");
                 return 1;
             } else {
                 return 0;
