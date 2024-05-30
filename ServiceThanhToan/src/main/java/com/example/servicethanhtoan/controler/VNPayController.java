@@ -5,28 +5,23 @@ import com.example.servicethanhtoan.service.VNPayService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/thanhtoan")
 public class VNPayController {
 
     private final VNPayService vnPayService;
-
-
-    @GetMapping("")
-    public String home(){
-        return "hello world";
-    }
+    
 
     @PostMapping("/submitOrder")
     public String submidOrder(@RequestParam("amount") int orderTotal,
                               @RequestParam("orderInfo") String orderInfo,
                               HttpServletRequest request){
-        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String portReact = "3000";
+        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" +  portReact;
+//        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         return vnPayService.createOrder(orderTotal, orderInfo, baseUrl);
     }
 
