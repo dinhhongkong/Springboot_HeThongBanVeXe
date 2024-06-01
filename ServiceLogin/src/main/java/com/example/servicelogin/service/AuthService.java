@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class AuthService {
@@ -16,12 +18,14 @@ public class AuthService {
     private JwtService jwtService;
 
 
-    public boolean checkLogin(AuthRequest authRequest){
-        Account account = accountRepository.findByUsername(authRequest.getUsername());
-        return  passwordEncoder.matches(authRequest.getPassword(), account.getPassword());
+    public int checkLogin(AuthRequest authRequest){
+        Optional<Account> account = accountRepository.findByUsername(authRequest.getUsername());
+        return account.map(value -> Boolean.compare(passwordEncoder.matches(authRequest.getPassword(), value.getPassword()), true)).orElse(2);
     }
 
     public Account saveUser(Account account){
+        Optional<Account> accountCheck = accountRepository.findByUsername(account.getUsername());
+        if (accountCheck.isPresent()) return null;
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setRole(new Role().builder().id(1).build());
         return accountRepository.save(account);

@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RestController
 @AllArgsConstructor
@@ -27,17 +29,25 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest){
         RespondData respondData= new RespondData();
-        if(service.checkLogin(authRequest)){
+        if(service.checkLogin(authRequest) == 0){
             respondData.setStatus(200);
             respondData.setData(service.generateToken(authRequest.getUsername()));
-            respondData.setMessage("login success");
-        }else {
-            respondData.setStatus(400);
+            respondData.setMessage("Login success");
+        }else
+        if (service.checkLogin(authRequest) == 2)
+        {
+            respondData.setStatus(404);
             respondData.setData("");
-            respondData.setMessage("login failed");
+            respondData.setMessage("Not found account");
+        }
+        else
+        {
+            respondData.setStatus(401);
+            respondData.setData("");
+            respondData.setMessage("Wrong password");
         }
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
@@ -45,11 +55,17 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> addNewUser(@RequestBody Account account) {
         Account savedAccount = service.saveUser(account);
+        RespondData respondData= new RespondData();
         if (savedAccount != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedAccount);
+            respondData.setStatus(200);
+            respondData.setData(savedAccount);
+            respondData.setMessage("Regis success");
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            respondData.setStatus(400);
+            respondData.setData("");
+            respondData.setMessage("Existed account");
         }
+        return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
     @PostMapping("/token")
