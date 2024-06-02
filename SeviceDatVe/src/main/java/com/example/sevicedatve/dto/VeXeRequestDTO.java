@@ -5,7 +5,7 @@ import java.util.List;
 
 public class VeXeRequestDTO {
 
-    private Date ngayDat;
+    private String ngayDat;
 
     private boolean trangThaiThanhToan;
 
@@ -25,7 +25,7 @@ public class VeXeRequestDTO {
     public VeXeRequestDTO() {
     }
 
-    public VeXeRequestDTO(Date ngayDat, boolean trangThaiThanhToan, List<String> listSeat, int idKhachHang, int idChuyenXe, int idQuanLy, String name, String phone, String email) {
+    public VeXeRequestDTO(String ngayDat, boolean trangThaiThanhToan, List<String> listSeat, int idKhachHang, int idChuyenXe, int idQuanLy, String name, String phone, String email) {
         this.ngayDat = ngayDat;
         this.trangThaiThanhToan = trangThaiThanhToan;
         this.listSeat = listSeat;
@@ -37,11 +37,11 @@ public class VeXeRequestDTO {
         this.email = email;
     }
 
-    public Date getNgayDat() {
+    public String getNgayDat() {
         return ngayDat;
     }
 
-    public void setNgayDat(Date ngayDat) {
+    public void setNgayDat(String ngayDat) {
         this.ngayDat = ngayDat;
     }
 

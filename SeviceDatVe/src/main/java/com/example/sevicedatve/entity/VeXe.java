@@ -12,7 +12,7 @@ public class VeXe {
     private int id;
 
     @Column(name = "ngay_dat")
-    private Date ngayDat;
+    private String ngayDat;
 
     @Column(name = "trang_thai_thanh_toan")
     private boolean trangThaiThanhToan;
@@ -44,7 +44,7 @@ public class VeXe {
     public VeXe() {
     }
 
-    public VeXe(int id, Date ngayDat, boolean trangThaiThanhToan, String maGhe, KhachHang khachHang, ChuyenXe chuyenXe, QuanLy quanLy, String hoTenKH, String phoneKH, String emailKH) {
+    public VeXe(int id, String ngayDat, boolean trangThaiThanhToan, String maGhe, KhachHang khachHang, ChuyenXe chuyenXe, QuanLy quanLy, String hoTenKH, String phoneKH, String emailKH) {
         this.id = id;
         this.ngayDat = ngayDat;
         this.trangThaiThanhToan = trangThaiThanhToan;
@@ -65,11 +65,11 @@ public class VeXe {
         this.id = id;
     }
 
-    public Date getNgayDat() {
+    public String getNgayDat() {
         return ngayDat;
     }
 
-    public void setNgayDat(Date ngayDat) {
+    public void setNgayDat(String ngayDat) {
         this.ngayDat = ngayDat;
     }
 

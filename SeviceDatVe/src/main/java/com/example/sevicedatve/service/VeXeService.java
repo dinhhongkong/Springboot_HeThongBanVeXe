@@ -2,6 +2,7 @@ package com.example.sevicedatve.service;
 
 import com.example.sevicedatve.dto.ListMaGheDaDatDTO;
 import com.example.sevicedatve.dto.VeXeRequestDTO;
+import com.example.sevicedatve.dto.VeXeTraCuuDTO;
 import com.example.sevicedatve.entity.ChuyenXe;
 import com.example.sevicedatve.entity.KhachHang;
 import com.example.sevicedatve.entity.QuanLy;
@@ -85,6 +86,28 @@ public class VeXeService implements VeXeImp {
         }catch (Exception e){
             System.out.println("Loi lay danh sach ma ghe da dat: " + e.getMessage());
         }
+        return null;
+    }
+
+    @Override
+    public VeXeTraCuuDTO getThongTinVeXeByPhoneKHAndMaGheAndNgayDat(String phone, String maGhe, String ngayDat) {
+        try{
+            VeXe veXe= veXeRepository.findByPhoneKHAndMaGheAndNgayDat(phone, maGhe, ngayDat);
+            VeXeTraCuuDTO veXeTraCuuDTO= new VeXeTraCuuDTO();
+            if(veXe != null){
+                veXeTraCuuDTO.setName(veXe.getHoTenKH());
+                veXeTraCuuDTO.setPhone(veXe.getPhoneKH());
+                veXeTraCuuDTO.setEmail(veXe.getEmailKH());
+                veXeTraCuuDTO.setNgayKhoiHanh(veXe.getChuyenXe().getNgayKhoiHanh());
+                veXeTraCuuDTO.setGioXuatPhat(veXe.getChuyenXe().getGioXuatPhat());
+                veXeTraCuuDTO.setTinhXuatPhat(veXe.getChuyenXe().getTinhDi().getTenTinh());
+                veXeTraCuuDTO.setTinhDen(veXe.getChuyenXe().getTinhDen().getTenTinh());
+                return veXeTraCuuDTO;
+            }
+        }catch (Exception e){
+            System.out.println("lỗi tra cứu vé: " + e.getMessage());
+        }
+
         return null;
     }
 }
