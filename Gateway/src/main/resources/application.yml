@@ -23,8 +23,8 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/quanly/**
-          filters:
-            - AuthenticationFilter
+#          filters:
+#            - AuthenticationFilter
 
         - id: thanh-toan-service
           uri: http://localhost:8083
