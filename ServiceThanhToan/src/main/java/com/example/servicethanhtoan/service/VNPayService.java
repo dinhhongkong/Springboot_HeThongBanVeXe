@@ -1,14 +1,12 @@
 package com.example.servicethanhtoan.service;
 
 import com.example.servicethanhtoan.config.VNPayConfig;
-import com.example.servicethanhtoan.dto.request.PaymentRequest;
-import com.example.servicethanhtoan.entity.VeXe;
+import com.example.servicethanhtoan.entity.Ticket;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -18,7 +16,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class VNPayService {
 
-    private final VeXeService veXeService;
+    private final TicketService ticketService;
     private final SmsService smsService;
 
     public String createOrder(int total, String orderInfor, String urlReturn){
@@ -111,14 +109,14 @@ public class VNPayService {
                 String ngayKhoiHang = "";
                 String gioKhoiHanh ="";
                 for (Integer ticketId: ticketIdList ) {
-                    VeXe veXe = veXeService.findById(ticketId);
-                    veXe.setTransactionId(request.getParameter("vnp_TransactionNo"));
-                    veXe.setTrangThaiThanhToan(1);
-                    veXe.setPaymentMethod("VNPAY");
-                    phoneNumber = veXe.getPhoneNumber();
-                    ngayKhoiHang = veXe.getChuyenXe().getNgayKhoiHanh();
-                    gioKhoiHanh = veXe.getChuyenXe().getGioXuatPhat();
-                    veXeService.save(veXe);
+                    Ticket ticket = ticketService.findById(ticketId);
+                    ticket.setTransactionId(request.getParameter("vnp_TransactionNo"));
+                    ticket.setPaymentStatus(1);
+                    ticket.setPaymentMethod("VNPAY");
+                    phoneNumber = ticket.getPhoneNumber();
+                    ngayKhoiHang = ticket.getChuyenXe().getNgayKhoiHanh();
+                    gioKhoiHanh = ticket.getChuyenXe().getGioXuatPhat();
+                    ticketService.save(ticket);
                 }
                 smsService.sendSms(phoneNumber,ticketIdList, ngayKhoiHang, gioKhoiHanh);
 

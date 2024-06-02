@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -26,5 +25,5 @@ public class ChuyenXe {
     private String gioXuatPhat;
 
     @OneToMany(mappedBy = "chuyenXe")
-    private List<VeXe> listVeXe;
+    private List<Ticket> listTicket;
 }

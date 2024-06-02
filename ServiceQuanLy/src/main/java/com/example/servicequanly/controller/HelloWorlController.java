@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class QuanLyController {
-    @GetMapping("/quanly/home")
+public class HelloWorlController {
+    @GetMapping("/quanly/helloworld")
     public String home() {
-        return "home quan ly";
+        return "helloworld quan ly";
     }
 
 }
