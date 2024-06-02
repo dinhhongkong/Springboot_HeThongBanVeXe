@@ -39,6 +39,10 @@ public class Journey {
     @JoinColumn(name = "id_quan_ly")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "id_xe")
+    private Xe xe;
+
 
 
 
