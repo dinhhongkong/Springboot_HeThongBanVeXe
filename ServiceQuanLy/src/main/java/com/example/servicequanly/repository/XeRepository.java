@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface XeRepository extends JpaRepository<Xe, Integer> {
+    Xe findById(int id);
 }

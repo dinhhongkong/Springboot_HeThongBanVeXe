@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class XeServiceImp implements XeService {
@@ -48,6 +49,24 @@ public class XeServiceImp implements XeService {
             xeRepository.save(xe);
             return addXeDTO;
         }catch (Exception e){}
+        return null;
+    }
+
+    @Override
+    public XeDTO update(int id, String bienSo, int tongSoGhe, String loaiXe) {
+        try {
+            Xe xe= xeRepository.findById(id);
+            if(xe != null){
+                xe.setBienSo(bienSo);
+                xe.setTongSoGhe(tongSoGhe);
+                xe.setLoai_xe(loaiXe);
+                xeRepository.save(xe);
+                return new XeDTO(id, bienSo, tongSoGhe, loaiXe);
+            }
+
+        }catch (Exception e){
+
+        }
         return null;
     }
 }

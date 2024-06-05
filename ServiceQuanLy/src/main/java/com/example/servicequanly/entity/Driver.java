@@ -25,4 +25,10 @@ public class Driver {
     @Column(name = "so_dien_thoai")
     private String phoneNumber;
 
+    @Column(name = "que_quan")
+    private String queQuan;
+
+    @Column(name = "loai_bang_lai")
+    private String loaiBangLai;
+
 }

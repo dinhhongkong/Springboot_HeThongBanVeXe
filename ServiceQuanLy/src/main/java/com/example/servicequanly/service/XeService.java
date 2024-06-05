@@ -8,4 +8,6 @@ import java.util.List;
 public interface XeService {
     List<XeDTO> getListXe();
     AddXeDTO insertXe(String bienSo, int tongSoGhe, String loaiXe);
+
+    XeDTO update(int id, String bienSo, int tongSoGhe, String loaiXe);
 }
