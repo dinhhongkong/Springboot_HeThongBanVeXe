@@ -1,5 +1,6 @@
 package com.example.servicelogin.service;
 
+import com.example.servicelogin.dto.AccountResponse;
 import com.example.servicelogin.dto.AuthRequest;
 import com.example.servicelogin.entity.Account;
 import com.example.servicelogin.entity.Role;
@@ -27,7 +28,7 @@ public class AuthService {
         Optional<Account> accountCheck = accountRepository.findByUsername(account.getUsername());
         if (accountCheck.isPresent()) return null;
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        account.setRole(new Role().builder().id(1).build());
+        account.setRole(Role.builder().id(1).build());
         return accountRepository.save(account);
     }
 

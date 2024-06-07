@@ -14,7 +14,7 @@ import java.util.Date;
 public class AuthExceptionHandler {
     @ExceptionHandler(JwtException.class)
     public ResponseEntity<?> tokenIsInvalid(Exception exception, WebRequest request) {
-        return new ResponseEntity<>(new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false)), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false)), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
