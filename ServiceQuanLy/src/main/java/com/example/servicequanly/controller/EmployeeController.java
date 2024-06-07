@@ -17,7 +17,7 @@ import java.util.List;
 public class EmployeeController {
     private EmployeeService employeeService;
 
-    @GetMapping("/employee")
+    @GetMapping("/employees")
     public ResponseEntity<?> getAllEmployee() {
         List<Employee> employeeList = employeeService.getAllEmployee();
         return ResponseEntity.ok(employeeList);
@@ -29,8 +29,8 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeSaved);
     }
 
-    @DeleteMapping("/employee/{id}")
-    public ResponseEntity<?> delele(@RequestParam int id) {
+    @DeleteMapping("/employee")
+    public ResponseEntity<?> deleteEmployee(@RequestParam("id") int id) {
         Employee employeeDeleted = employeeService.deleteById(id);
         return ResponseEntity.ok(employeeDeleted);
     }

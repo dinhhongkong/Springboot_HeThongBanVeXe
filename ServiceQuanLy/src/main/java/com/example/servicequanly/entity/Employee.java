@@ -24,4 +24,7 @@ public class Employee {
 
     @Column(name = "so_dien_thoai")
     private String phoneNumber;
+
+    @Column(name = "que_quan")
+    private String address;
 }

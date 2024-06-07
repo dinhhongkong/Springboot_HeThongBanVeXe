@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class XeController {
     @Autowired
     private XeService xeService;
-    @GetMapping("/get-list-xe")
+    @GetMapping("/buses")
     public ResponseEntity<?> getListXe(){
         RespondData respondData= new RespondData();
         if(xeService.getListXe() != null){
@@ -31,7 +31,7 @@ public class XeController {
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/bus")
     public ResponseEntity<?> insertXe(@RequestParam String bienSo, @RequestParam int tongSoGhe, @RequestParam String loaiXe){
         RespondData respondData= new RespondData();
         AddXeDTO addXeDTO= xeService.insertXe(bienSo, tongSoGhe, loaiXe);
@@ -47,7 +47,7 @@ public class XeController {
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/bus")
     public ResponseEntity<?> updateXe(@RequestParam int id, @RequestParam String bienSo, @RequestParam int tongSoGhe, @RequestParam String loaiXe){
         RespondData respondData= new RespondData();
         XeDTO xeDTO = xeService.update(id, bienSo, tongSoGhe, loaiXe);

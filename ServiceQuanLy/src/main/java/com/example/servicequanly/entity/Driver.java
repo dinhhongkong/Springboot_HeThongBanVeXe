@@ -26,9 +26,9 @@ public class Driver {
     private String phoneNumber;
 
     @Column(name = "que_quan")
-    private String queQuan;
+    private String address;
 
     @Column(name = "loai_bang_lai")
-    private String loaiBangLai;
+    private String typeLicense;
 
 }
