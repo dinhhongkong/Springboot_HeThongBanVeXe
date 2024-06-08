@@ -22,5 +22,4 @@ public class Province {
     @Column(name = "ten_tinh")
     private String provinceName;
 
-
 }

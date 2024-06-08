@@ -18,16 +18,18 @@ public class TicketMapperImp implements TicketMapper {
     public List<Ticket> oneWayTicketToTicket(PaymentOneWay ticketOneWay) {
 
         return ticketOneWay.getSeatName().stream().map(seat -> {
-            Ticket ticket = new Ticket();
-            ticket.setDateOrder(LocalDateTime.now().toString());
-            ticket.setPaymentStatus(ticketOneWay.getPaymentStatus());
-            ticket.setSeatName(seat);
-            ticket.setFullName(ticketOneWay.getFullName());
-            ticket.setPhoneNumber(ticketOneWay.getPhoneNumber());
-            ticket.setEmail(ticketOneWay.getEmail());
-            ticket.setTransactionId(ticketOneWay.getTransactionId());
-            ticket.setPaymentMethod("ZaloPay");
-            ticket.setChuyenXe( ChuyenXe.builder().id(ticketOneWay.getJourneyTrip()).build());
+            Ticket ticket = Ticket.builder()
+                    .dateOrder(LocalDateTime.now().toString())
+                    .paymentStatus(ticketOneWay.getPaymentStatus())
+                    .seatName(seat)
+                    .fullName(ticketOneWay.getFullName())
+                    .phoneNumber(ticketOneWay.getPhoneNumber())
+                    .email(ticketOneWay.getEmail())
+                    .transactionId(ticketOneWay.getTransactionId())
+                    .paymentMethod("ZaloPay")
+                    .chuyenXe(ChuyenXe.builder().id(ticketOneWay.getJourneyTrip()).build())
+                    .build();
+
             return ticket;
         }).collect(Collectors.toList());
 
@@ -39,32 +41,34 @@ public class TicketMapperImp implements TicketMapper {
 
         // Duyệt qua danh sách ghế của chuyến đi
         for (String seat : ticketTwoWay.getSeatDepartureName()) {
-            Ticket ticket = new Ticket();
-            ticket.setDateOrder(LocalDateTime.now().toString());
-            ticket.setPaymentStatus(ticketTwoWay.getPaymentStatus());
-            ticket.setSeatName(seat);
-            ticket.setFullName(ticketTwoWay.getFullName());
-            ticket.setPhoneNumber(ticketTwoWay.getPhoneNumber());
-            ticket.setEmail(ticketTwoWay.getEmail());
-            ticket.setTransactionId(ticketTwoWay.getTransactionId());
-            ticket.setPaymentMethod("ZaloPay");
+            Ticket ticket = Ticket.builder()
+                    .dateOrder(LocalDateTime.now().toString())
+                    .paymentStatus(ticketTwoWay.getPaymentStatus())
+                    .seatName(seat)
+                    .fullName(ticketTwoWay.getFullName())
+                    .phoneNumber(ticketTwoWay.getPhoneNumber())
+                    .email(ticketTwoWay.getEmail())
+                    .transactionId(ticketTwoWay.getTransactionId())
+                    .paymentMethod("ZaloPay")
+                    .build();
             // Set the ChuyenXe object here
-             ticket.setChuyenXe(ChuyenXe.builder().id(ticketTwoWay.getJourneyDepartureTrip()).build());
+            ticket.setChuyenXe(ChuyenXe.builder().id(ticketTwoWay.getJourneyDepartureTrip()).build());
             tickets.add(ticket);
         }
 
         // Duyệt qua danh sách ghế của chuyến về
         for (String seat : ticketTwoWay.getSeatReturnName()) {
-            Ticket ticket = new Ticket();
-            ticket.setDateOrder(LocalDateTime.now().toString());
-            ticket.setPaymentStatus(ticketTwoWay.getPaymentStatus());
-            ticket.setSeatName(seat);
-            ticket.setFullName(ticketTwoWay.getFullName());
-            ticket.setPhoneNumber(ticketTwoWay.getPhoneNumber());
-            ticket.setEmail(ticketTwoWay.getEmail());
-            ticket.setTransactionId(ticketTwoWay.getTransactionId());
-            ticket.setPaymentMethod("ZaloPay");
-            ticket.setChuyenXe(ChuyenXe.builder().id(ticketTwoWay.getJourneyReturnTrip()).build());
+            Ticket ticket = Ticket.builder()
+                    .dateOrder(LocalDateTime.now().toString())
+                    .paymentStatus(ticketTwoWay.getPaymentStatus())
+                    .seatName(seat)
+                    .fullName(ticketTwoWay.getFullName())
+                    .phoneNumber(ticketTwoWay.getPhoneNumber())
+                    .email(ticketTwoWay.getEmail())
+                    .transactionId(ticketTwoWay.getTransactionId())
+                    .paymentMethod("ZaloPay")
+                    .chuyenXe(ChuyenXe.builder().id(ticketTwoWay.getJourneyReturnTrip()).build())
+                    .build();
             tickets.add(ticket);
         }
 

@@ -1,5 +1,8 @@
 package com.example.servicequanly.dto;
 
+import lombok.Builder;
+
+@Builder
 public class AddXeDTO {
     private String bienSo;
 

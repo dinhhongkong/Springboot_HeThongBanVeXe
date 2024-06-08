@@ -79,8 +79,8 @@ public class AuthController {
     }
 
 
-    @GetMapping("/validate")
-    public ResponseEntity<String> validateToken(@RequestParam("token") String token) {
+    @GetMapping("/validate/{token}")
+    public ResponseEntity<String> validateToken(@PathVariable("token") String token) {
         service.validateToken(token);
         return ResponseEntity.ok("Token is valid");
     }

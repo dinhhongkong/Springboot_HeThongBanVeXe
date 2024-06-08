@@ -23,11 +23,12 @@ public class XeServiceImp implements XeService {
             List<XeDTO> xeDTOList = new ArrayList<>();
             if(listXe != null) {
                 for (int i = 0; i < listXe.size(); i++) {
-                    XeDTO xeDTO = new XeDTO();
-                    xeDTO.setId(listXe.get(i).getId());
-                    xeDTO.setBienSo(listXe.get(i).getBienSo());
-                    xeDTO.setTongSoGhe(listXe.get(i).getTongSoGhe());
-                    xeDTO.setLoaiXe(listXe.get(i).getLoai_xe());
+                    XeDTO xeDTO = XeDTO.builder()
+                            .id(listXe.get(i).getId())
+                            .bienSo(listXe.get(i).getBienSo())
+                            .tongSoGhe(listXe.get(i).getTongSoGhe())
+                            .loaiXe(listXe.get(i).getLoai_xe())
+                            .build();
                     xeDTOList.add(xeDTO);
                 }
                 return xeDTOList;
