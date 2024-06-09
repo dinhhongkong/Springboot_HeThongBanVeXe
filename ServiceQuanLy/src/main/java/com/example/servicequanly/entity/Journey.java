@@ -41,7 +41,7 @@ public class Journey {
 
     @ManyToOne
     @JoinColumn(name = "id_xe")
-    private Xe xe;
+    private Bus bus;
 
 
 

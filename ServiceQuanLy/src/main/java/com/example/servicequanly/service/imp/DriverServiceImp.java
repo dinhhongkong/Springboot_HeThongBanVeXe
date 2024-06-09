@@ -6,18 +6,19 @@ import com.example.servicequanly.mapper.DriverMapper;
 import com.example.servicequanly.repository.DriverRepository;
 import com.example.servicequanly.service.DriverService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class DriverServiceImp implements DriverService {
 
-    @Autowired
     private DriverRepository driverRepository;
 
-    @Autowired
     private DriverMapper driverMapper;
 
     @Override
@@ -37,6 +38,7 @@ public class DriverServiceImp implements DriverService {
     }
 
     @Override
+    @Transactional
     public Driver deleteDriver(int id) {
         Driver driver = driverRepository
                 .findById(id)

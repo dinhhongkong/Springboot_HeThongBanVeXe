@@ -1,6 +1,8 @@
 package com.example.servicequanly.service.imp;
 
+import com.example.servicequanly.dto.request.EmployeeCreationRequest;
 import com.example.servicequanly.entity.Employee;
+import com.example.servicequanly.mapper.EmployeeMapper;
 import com.example.servicequanly.repository.EmployeeRepository;
 import com.example.servicequanly.service.EmployeeService;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeServiceImp implements EmployeeService {
     private EmployeeRepository employeeRepository;
+    private EmployeeMapper employeeMapper;
 
 
     @Override
@@ -23,7 +26,13 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public Employee save(Employee employee) {
+    public Employee createEmployee(EmployeeCreationRequest employeeCreationRequest) {
+        Employee employee = employeeMapper.employeeCreationRequestToEmployee(employeeCreationRequest);
+        return employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 

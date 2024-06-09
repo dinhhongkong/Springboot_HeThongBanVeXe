@@ -1,4 +1,5 @@
-package com.example.servicelogin.payload;
+package com.example.servicequanly.dto.request;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,11 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RespondData {
-    private int status;
-    private String message;
-    private Object data;
+@Builder
+public class BusCreationRequest {
+    private String licensePlate;
+    private String busType;
 }

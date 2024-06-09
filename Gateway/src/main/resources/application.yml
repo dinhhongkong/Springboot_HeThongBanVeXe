@@ -22,7 +22,7 @@ spring:
         - id: quan-ly-service
           uri: http://localhost:8082
           predicates:
-            - Path=/quanly/**
+            - Path=/manage/**
 #          filters:
 #            - AuthenticationFilter
 
