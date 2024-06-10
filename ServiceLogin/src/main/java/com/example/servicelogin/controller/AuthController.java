@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -42,12 +41,15 @@ public class AuthController {
             respondData.setStatus(404);
             respondData.setData("");
             respondData.setMessage("Not found account");
+            return new ResponseEntity<>(respondData, HttpStatus.UNAUTHORIZED);
         }
         else
         {
             respondData.setStatus(401);
             respondData.setData("");
             respondData.setMessage("Wrong password");
+            new ResponseEntity<>(respondData, HttpStatus.UNAUTHORIZED);
+
         }
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }

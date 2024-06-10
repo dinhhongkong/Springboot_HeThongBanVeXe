@@ -22,7 +22,7 @@ public class Account implements UserDetails {
 
     private String password;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_role")
     private Role role;
 
