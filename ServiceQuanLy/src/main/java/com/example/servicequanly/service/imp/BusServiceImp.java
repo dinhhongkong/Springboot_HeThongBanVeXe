@@ -33,7 +33,7 @@ public class BusServiceImp implements BusService {
         if (busCreationRequest.getBusType().equals("Limousine")) {
             bus.setTotalSeats(36);
         }
-        else if (busCreationRequest.getBusType().equals("Giường nằm")) {
+        else if (busCreationRequest.getBusType().equals("Giường")) {
             bus.setTotalSeats(44);
         }
         return busRepository.save(bus);
@@ -45,7 +45,7 @@ public class BusServiceImp implements BusService {
         if (busCreationRequest.getBusType().equals("Limousine")) {
             bus.setTotalSeats(36);
         }
-        else if (busCreationRequest.getBusType().equals("Giường nằm")) {
+        else if (busCreationRequest.getBusType().equals("Giường")) {
             bus.setTotalSeats(44);
         }
         return busRepository.save(bus);

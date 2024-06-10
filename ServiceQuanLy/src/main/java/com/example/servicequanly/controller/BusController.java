@@ -58,7 +58,7 @@ public class BusController {
     }
 
     @DeleteMapping("/bus")
-    public ResponseEntity<?> updateBus(@RequestParam int id) {
+    public ResponseEntity<?> deleteBus(@RequestParam int id) {
         Bus bus = busService.deleteBus(id);
         RespondData respondData = new RespondData();
         respondData.setStatus(HttpStatus.ACCEPTED.value());

@@ -13,7 +13,7 @@ public class BusMapperImp implements BusMapper {
     public Bus busCreationRequestToBus(BusCreationRequest busCreationRequest) {
         return Bus.builder()
                 .licensePlate(busCreationRequest.getLicensePlate())
-                .bussType(busCreationRequest.getBusType())
+                .busType(busCreationRequest.getBusType())
                 .build();
     }
 
@@ -22,7 +22,7 @@ public class BusMapperImp implements BusMapper {
         return Bus.builder()
                 .id(busUpdateRequest.getId())
                 .licensePlate(busUpdateRequest.getLicensePlate())
-                .bussType(busUpdateRequest.getBusType())
+                .busType(busUpdateRequest.getBusType())
                 .build();
     }
 
