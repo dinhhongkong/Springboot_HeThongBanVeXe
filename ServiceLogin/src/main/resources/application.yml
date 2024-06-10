@@ -7,8 +7,8 @@ spring:
     password: 12345
 #    password: 270701
   jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
+#    hibernate.ddl-auto: update
+#    generate-ddl: true
     show-sql: true
 
 server:
