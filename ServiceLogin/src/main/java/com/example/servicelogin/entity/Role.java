@@ -22,6 +22,6 @@ public class Role {
     @Column(name = "ten_role")
     private String role;
 
-    @OneToMany()
-    private List<Account> taiKhoanList;
+    @OneToMany(mappedBy = "role")
+    private List<Account> accountList;
 }
