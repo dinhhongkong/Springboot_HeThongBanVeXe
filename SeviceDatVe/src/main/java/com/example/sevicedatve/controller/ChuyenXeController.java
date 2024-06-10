@@ -18,10 +18,7 @@ import java.util.List;
 public class ChuyenXeController {
     @Autowired
     ChuyenXeImp chuyenXeImp;
-    @GetMapping("/test")
-    public String home(){
-        return "Trang chu chuyen xe";
-    }
+
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAllChuyenXe(){

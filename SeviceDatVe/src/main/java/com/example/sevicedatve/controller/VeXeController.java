@@ -21,10 +21,7 @@ import java.util.List;
 public class VeXeController {
     @Autowired
     VeXeImp veXeImp;
-    @GetMapping("/test")
-    public String test(){
-        return "Day la trang ve xe";
-    }
+
 
     @GetMapping("/get-list-ve-da-dat")
     public ResponseEntity<?> getAllVeXeByChuyenXe(@RequestParam int idChuyenXe){

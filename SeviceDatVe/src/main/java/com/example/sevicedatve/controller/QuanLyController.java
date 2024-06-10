@@ -15,10 +15,7 @@ import java.util.List;
 public class QuanLyController {
     @Autowired
     QuanLyImp quanLyImp;
-    @GetMapping("/test")
-    public String test(){
-        return "Day la trang nhan vien quan ly";
-    }
+
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAllQuanLy(){
