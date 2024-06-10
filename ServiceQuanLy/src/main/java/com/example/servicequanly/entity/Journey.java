@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity(name = "chuyen_xe")
 @Data
 @AllArgsConstructor
@@ -13,10 +15,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Journey {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "ngay_khoi_hanh")
-    private String departureDate;
+    private LocalDate departureDate;
 
     @Column(name = "gio_xuat_phat")
     private String departureTime;

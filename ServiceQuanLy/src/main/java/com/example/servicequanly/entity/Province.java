@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 public class Province {
     @Id
+    @Column(name = "ma_tinh")
     private int provinceId;
 
     @Column(name = "ten_tinh")

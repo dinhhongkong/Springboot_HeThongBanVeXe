@@ -1,8 +1,6 @@
 package com.example.servicequanly.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "ho_ten")
     private String fullName;

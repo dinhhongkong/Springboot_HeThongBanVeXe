@@ -23,6 +23,6 @@ public class Bus {
     private int totalSeats;
 
     @Column(name = "loai_xe")
-    private String bussType;
+    private String busType;
 
 }
