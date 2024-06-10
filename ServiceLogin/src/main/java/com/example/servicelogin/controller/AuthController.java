@@ -54,6 +54,10 @@ public class AuthController {
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
+
+
+
+
     @PostMapping("/register")
     public ResponseEntity<?> addNewUser(@RequestBody Account account) {
         Account savedAccount = service.saveUser(account);
