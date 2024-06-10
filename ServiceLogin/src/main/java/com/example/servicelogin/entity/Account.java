@@ -26,10 +26,16 @@ public class Account implements UserDetails {
     @JoinColumn(name = "id_role")
     private Role role;
 
+    @OneToOne(mappedBy = "account")
+    private Employee employee;
+
+    @OneToOne(mappedBy = "account")
+    private Customer customer;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role.getRole()));
+        return Collections.singleton(new SimpleGrantedAuthority(role.getRoleName()));
     }
 
 
