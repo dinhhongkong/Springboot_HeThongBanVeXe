@@ -55,6 +55,16 @@ public class AuthService {
         return jwtService.generateToken(claims,username);
     }
 
+    public Customer updateCustomer(Customer customer) {
+        Customer customerDB = customerRepository.findById(customer.getId())
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        customerDB.setFullName(customer.getFullName());
+        customerDB.setPhoneNumber(customer.getPhoneNumber());
+        customerDB.setEmail(customer.getEmail());
+        customerRepository.save(customerDB);
+        return customer;
+    }
+
     public void validateToken(String token) {
         jwtService.validateToken(token);
     }

@@ -28,14 +28,16 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(
+                .authorizeHttpRequests((requests) ->
+                                requests.requestMatchers(
                                 "/auth/test",
                                 "/auth/login",
                                 "/auth/register",
                                 "/auth/token",
                                 "/auth/validate/**",
-                                "/auth/admin/login").permitAll()
+                                "/auth/admin/login",
+                                "/auth/customer").permitAll()
+
 //                        .anyRequest().permitAll()
 //                        .anyRequest().authenticated()
                 )

@@ -3,6 +3,7 @@ package com.example.servicelogin.controller;
 
 import com.example.servicelogin.dto.AuthRequest;
 import com.example.servicelogin.entity.Account;
+import com.example.servicelogin.entity.Customer;
 import com.example.servicelogin.payload.RespondData;
 import com.example.servicelogin.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -24,27 +25,23 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @GetMapping("/test")
-    public String test(){
+    public String test() {
         return "login";
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest){
-        RespondData respondData= new RespondData();
-        if(service.checkLogin(authRequest) == 0){
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        RespondData respondData = new RespondData();
+        if (service.checkLogin(authRequest) == 0) {
             respondData.setStatus(200);
             respondData.setData(service.generateToken(authRequest.getUsername()));
             respondData.setMessage("Login success");
-        }else
-        if (service.checkLogin(authRequest) == 2)
-        {
+        } else if (service.checkLogin(authRequest) == 2) {
             respondData.setStatus(404);
             respondData.setData("");
             respondData.setMessage("Not found account");
             return new ResponseEntity<>(respondData, HttpStatus.UNAUTHORIZED);
-        }
-        else
-        {
+        } else {
             respondData.setStatus(401);
             respondData.setData("");
             respondData.setMessage("Wrong password");
@@ -55,13 +52,10 @@ public class AuthController {
     }
 
 
-
-
-
     @PostMapping("/register")
     public ResponseEntity<?> addNewUser(@RequestBody Account account) {
         Account savedAccount = service.saveUser(account);
-        RespondData respondData= new RespondData();
+        RespondData respondData = new RespondData();
         if (savedAccount != null) {
             respondData.setStatus(200);
             respondData.setData(savedAccount);
@@ -82,6 +76,15 @@ public class AuthController {
         } else {
             throw new RuntimeException("invalid access");
         }
+    }
+
+    @PostMapping("/customer")
+    public ResponseEntity<?> updateInfo(@RequestBody Customer customer) {
+        RespondData respondData = new RespondData();
+        respondData.setStatus(200);
+        respondData.setData(service.updateCustomer(customer));
+        respondData.setMessage("Update success");
+        return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
 
 
