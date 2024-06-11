@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "ho_ten")
     private String fullName;

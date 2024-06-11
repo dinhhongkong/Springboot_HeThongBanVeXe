@@ -3,18 +3,24 @@ package com.example.servicelogin.service;
 import com.example.servicelogin.dto.AccountResponse;
 import com.example.servicelogin.dto.AuthRequest;
 import com.example.servicelogin.entity.Account;
+import com.example.servicelogin.entity.Customer;
 import com.example.servicelogin.entity.Role;
 import com.example.servicelogin.repository.AccountRepository;
+import com.example.servicelogin.repository.CustomerRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class AuthService {
     private AccountRepository accountRepository;
+    private CustomerRepository customerRepository;
     private PasswordEncoder passwordEncoder;
     private JwtService jwtService;
 
@@ -24,16 +30,29 @@ public class AuthService {
         return account.map(value -> Boolean.compare(passwordEncoder.matches(authRequest.getPassword(), value.getPassword()), true)).orElse(2);
     }
 
+    @Transactional
     public Account saveUser(Account account){
         Optional<Account> accountCheck = accountRepository.findByUsername(account.getUsername());
         if (accountCheck.isPresent()) return null;
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setRole(Role.builder().id(1).build());
-        return accountRepository.save(account);
+        account= accountRepository.save(account);
+        customerRepository.save(Customer.builder().account(Account.builder().username(account.getUsername()).build()).build());
+
+        return account;
     }
 
     public String generateToken(String username) {
-        return jwtService.generateToken(username);
+        Optional<Account> account = accountRepository.findByUsername(username);
+        Map<String, Object> claims = new HashMap<>();
+        if (account.isPresent() && account.get().getCustomer() != null ) {
+
+            claims.put("customerId",account.get().getCustomer().getId());
+            claims.put("fullName",account.get().getCustomer().getFullName());
+            claims.put("phoneNumber",account.get().getCustomer().getPhoneNumber());
+            claims.put("email",account.get().getCustomer().getEmail());
+        }
+        return jwtService.generateToken(claims,username);
     }
 
     public void validateToken(String token) {

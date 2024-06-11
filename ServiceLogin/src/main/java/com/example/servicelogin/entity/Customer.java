@@ -1,16 +1,16 @@
 package com.example.servicelogin.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity(name = "khach_hang")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "ho_ten")
