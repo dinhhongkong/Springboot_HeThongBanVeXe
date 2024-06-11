@@ -2,6 +2,7 @@ package com.example.servicelogin.service;
 
 import com.example.servicelogin.dto.AccountResponse;
 import com.example.servicelogin.dto.AuthRequest;
+import com.example.servicelogin.dto.PasswordRequest;
 import com.example.servicelogin.entity.Account;
 import com.example.servicelogin.entity.Customer;
 import com.example.servicelogin.entity.Role;
@@ -63,6 +64,21 @@ public class AuthService {
         customerDB.setEmail(customer.getEmail());
         customerRepository.save(customerDB);
         return customer;
+    }
+
+    public void updatePassword(PasswordRequest passwordRequest) {
+        Customer customerDB = customerRepository.findById(passwordRequest.getId())
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        if(passwordEncoder.matches(customerDB.getAccount().getPassword(), passwordRequest.getOldPassword())) {
+            String newPassword = passwordEncoder.encode(passwordRequest.getNewPassword());
+            Account account = customerDB.getAccount();
+            account.setPassword(newPassword);
+            accountRepository.save(account);
+        }
+        else {
+            throw new RuntimeException("Mật khẩu cũ không chính xác");
+        }
     }
 
     public void validateToken(String token) {

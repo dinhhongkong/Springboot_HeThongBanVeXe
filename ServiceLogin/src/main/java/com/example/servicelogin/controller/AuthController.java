@@ -2,6 +2,7 @@ package com.example.servicelogin.controller;
 
 
 import com.example.servicelogin.dto.AuthRequest;
+import com.example.servicelogin.dto.PasswordRequest;
 import com.example.servicelogin.entity.Account;
 import com.example.servicelogin.entity.Customer;
 import com.example.servicelogin.payload.RespondData;
@@ -83,6 +84,16 @@ public class AuthController {
         RespondData respondData = new RespondData();
         respondData.setStatus(200);
         respondData.setData(service.updateCustomer(customer));
+        respondData.setMessage("Update success");
+        return new ResponseEntity<>(respondData, HttpStatus.OK);
+    }
+
+    @PutMapping("/customer/password")
+    public ResponseEntity<?> updatePassword(@RequestBody PasswordRequest passwordRequest) {
+        service.updatePassword(passwordRequest);
+        RespondData respondData = new RespondData();
+        respondData.setStatus(200);
+        respondData.setData("oke");
         respondData.setMessage("Update success");
         return new ResponseEntity<>(respondData, HttpStatus.OK);
     }
