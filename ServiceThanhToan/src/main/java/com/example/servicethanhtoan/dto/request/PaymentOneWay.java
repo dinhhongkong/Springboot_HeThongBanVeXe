@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -13,7 +14,7 @@ import java.util.Set;
 @Builder
 public class PaymentOneWay {
     private int paymentStatus;
-    private Set<String> seatName;
+    private List<String> seatName;
     private int customerId;
     private int journeyTrip;
     private String fullName;

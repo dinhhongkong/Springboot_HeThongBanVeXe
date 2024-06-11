@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 @Data
 @AllArgsConstructor
@@ -12,8 +13,8 @@ import java.util.Set;
 @Builder
 public class PaymentTwoWay {
     private int paymentStatus;
-    private Set<String> seatDepartureName;
-    private Set<String> seatReturnName;
+    private List<String> seatDepartureName;
+    private List<String> seatReturnName;
     private int customerId;
     private int journeyDepartureTrip;
     private int journeyReturnTrip;
