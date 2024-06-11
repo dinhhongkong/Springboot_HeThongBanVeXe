@@ -78,7 +78,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/customer")
+    @PutMapping("/customer")
     public ResponseEntity<?> updateInfo(@RequestBody Customer customer) {
         RespondData respondData = new RespondData();
         respondData.setStatus(200);
