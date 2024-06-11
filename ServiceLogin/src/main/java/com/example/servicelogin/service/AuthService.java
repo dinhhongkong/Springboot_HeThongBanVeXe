@@ -70,7 +70,8 @@ public class AuthService {
         Customer customerDB = customerRepository.findById(passwordRequest.getId())
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        if(passwordEncoder.matches(customerDB.getAccount().getPassword(), passwordRequest.getOldPassword())) {
+
+        if(passwordEncoder.matches( passwordRequest.getOldPassword(), customerDB.getAccount().getPassword())) {
             String newPassword = passwordEncoder.encode(passwordRequest.getNewPassword());
             Account account = customerDB.getAccount();
             account.setPassword(newPassword);

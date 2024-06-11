@@ -36,7 +36,8 @@ public class AuthConfig {
                                 "/auth/token",
                                 "/auth/validate/**",
                                 "/auth/admin/login",
-                                "/auth/customer").permitAll()
+                                "/auth/customer",
+                                "/auth/customer/password").permitAll()
 
 //                        .anyRequest().permitAll()
 //                        .anyRequest().authenticated()

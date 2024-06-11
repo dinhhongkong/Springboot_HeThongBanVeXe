@@ -21,4 +21,9 @@ public class AuthExceptionHandler {
     public ResponseEntity<?> userNotFound(Exception exception, WebRequest request) {
         return new ResponseEntity<>(new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false)), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> runTimeException(Exception exception, WebRequest request) {
+        return new ResponseEntity<>(new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false)), HttpStatus.NOT_FOUND);
+    }
 }
