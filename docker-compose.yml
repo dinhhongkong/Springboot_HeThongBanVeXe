@@ -1,0 +1,95 @@
+version: '3'
+services:
+
+#  frontend:
+#    build:
+#      context: ./dat-ve-xem-phim
+#      dockerfile: Dockerfile
+#    network_mode: "host"
+#    depends_on:
+#      - api-gateway
+#      - discovery-server
+#      - datve-service
+#      - dangnhap-service
+#      - thanhtoan-service
+#      - rap-phong-service
+#      - phim-suatchieu-service
+#    ports:
+#      - 3000:3000
+
+
+  discovery-server:
+    build:
+      context: ./DiscoveryServer
+      dockerfile: Dockerfile
+    network_mode: "host"
+    ports:
+      - 8761:8761
+
+  api-gateway:
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    network_mode: "host"
+    ports:
+      - 8080:8080
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
+    depends_on:
+      - api-gateway
+
+
+  login-service:
+    build:
+      context: ./ServiceLogin
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - discovery-server
+      - api-gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
+#
+#  thanhtoan-service:
+#    build:
+#      context: ./ServiceQuanLy
+#      dockerfile: Dockerfile
+#    network_mode: "host"
+#    depends_on:
+#      - api-gateway
+#      - discovery-server
+#    environment:
+#      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
+#
+
+  quanly-service:
+    build:
+      context: ./ServiceQuanLy
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - api-gateway
+      - discovery-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
+
+  datve-service:
+    build:
+      context: ./SeviceDatVe
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - api-gateway
+      - discovery-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
+
+
+
+networks:
+  hostnet:
+    driver: bridge
