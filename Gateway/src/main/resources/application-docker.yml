@@ -4,7 +4,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://discovery-server:8761/eureka/
+      defaultZone: http://DiscoveryServer:8761/eureka/
 
 spring:
   application:
@@ -33,11 +33,11 @@ spring:
             - AuthenticationFilter
 
         - id: thanh-toan-service
-          uri: http://thanhtoan-service:8083
+          uri: http://host.docker.internal:8083
           predicates:
             - Path=/thanhtoan/**
 
         - id: dat-ve-service
-          uri: http://host.docker.internal:8084
+          uri: http://datve-service:8084
           predicates:
             - Path=/datve/**, /chuyenxe/**, /nvquanly/**, /vexe/**

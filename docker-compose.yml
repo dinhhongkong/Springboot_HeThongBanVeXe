@@ -22,7 +22,9 @@ services:
     build:
       context: ./DiscoveryServer
       dockerfile: Dockerfile
-    network_mode: "host"
+    container_name: DiscoveryServer
+    networks:
+      - coach_ticket_booking_network
     ports:
       - 8761:8761
 
@@ -30,23 +32,29 @@ services:
     build:
       context: ./Gateway
       dockerfile: Dockerfile
-    network_mode: "host"
+    container_name: gateway
+    networks:
+      - coach_ticket_booking_network
     ports:
       - 8080:8080
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
     depends_on:
-      - api-gateway
+      - discovery-server
 
 
   login-service:
     build:
       context: ./ServiceLogin
       dockerfile: Dockerfile
-    network_mode: "host"
+    container_name: login-service
+    networks:
+      - coach_ticket_booking_network
     depends_on:
       - discovery-server
       - api-gateway
+    ports:
+      - 8081:8081
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
@@ -68,10 +76,14 @@ services:
     build:
       context: ./ServiceQuanLy
       dockerfile: Dockerfile
-    network_mode: "host"
+    container_name: quanly-service
+    networks:
+      - coach_ticket_booking_network
     depends_on:
       - api-gateway
       - discovery-server
+    ports:
+      - 8082:8082
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
@@ -80,10 +92,14 @@ services:
     build:
       context: ./SeviceDatVe
       dockerfile: Dockerfile
-    network_mode: "host"
+    container_name: datve-service
+    networks:
+      - coach_ticket_booking_network
     depends_on:
       - api-gateway
       - discovery-server
+    ports:
+      - 8084:8084
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://DiscoveryServer:8761/eureka
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/datvexe
@@ -91,5 +107,5 @@ services:
 
 
 networks:
-  hostnet:
+  coach_ticket_booking_network:
     driver: bridge
