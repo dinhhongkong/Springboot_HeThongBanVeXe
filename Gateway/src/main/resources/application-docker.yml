@@ -38,6 +38,6 @@ spring:
             - Path=/thanhtoan/**
 
         - id: dat-ve-service
-          uri: http://datve-service:8084
+          uri: http://host.docker.internal:8084
           predicates:
             - Path=/datve/**, /chuyenxe/**, /nvquanly/**, /vexe/**
