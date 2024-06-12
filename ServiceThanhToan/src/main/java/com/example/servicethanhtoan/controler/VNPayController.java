@@ -19,7 +19,7 @@ public class VNPayController {
                               @RequestParam("orderInfo") String orderInfo,
                               HttpServletRequest request){
         String portReact = "3000";
-        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" +  portReact;
+        String baseUrl = "http://localhost:3000";
 //        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         return vnPayService.createOrder(orderTotal, orderInfo, baseUrl);
     }
