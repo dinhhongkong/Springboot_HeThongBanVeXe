@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JourneyDetailRepository extends JpaRepository<JourneyDetail,JourneyDetail> {
 
+    void deleteByJourneyId(int id);
 }

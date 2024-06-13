@@ -13,4 +13,5 @@ public interface VeXeRepository extends JpaRepository<VeXe, Integer> {
     List<VeXe> findAllByChuyenXe(ChuyenXe chuyenXe);
 
     VeXe findByPhoneKHAndMaGheAndNgayDat(String phone, String maGhe, String ngayDat);
+    VeXe findByPhoneKHAndAndIdAndNgayDat(String phone, int idVe, String ngayDat);
 }

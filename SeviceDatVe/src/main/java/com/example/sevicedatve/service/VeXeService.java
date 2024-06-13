@@ -92,7 +92,9 @@ public class VeXeService implements VeXeImp {
     @Override
     public VeXeTraCuuDTO getThongTinVeXeByPhoneKHAndMaGheAndNgayDat(String phone, String maGhe, String ngayDat) {
         try{
-            VeXe veXe= veXeRepository.findByPhoneKHAndMaGheAndNgayDat(phone, maGhe, ngayDat);
+//            VeXe veXe= veXeRepository.findByPhoneKHAndMaGheAndNgayDat(phone, maGhe, ngayDat);
+            VeXe veXe= veXeRepository.findByPhoneKHAndAndIdAndNgayDat(phone, Integer.parseInt(maGhe), ngayDat);
+
             VeXeTraCuuDTO veXeTraCuuDTO= new VeXeTraCuuDTO();
             if(veXe != null){
                 veXeTraCuuDTO.setName(veXe.getHoTenKH());

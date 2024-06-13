@@ -58,6 +58,7 @@ public class JourneyServiceImp implements JourneyService {
         Journey journey = journeyRepository
                 .findById(journeyId)
                 .orElseThrow(() -> new EntityNotFoundException("Journey not found with id " + journeyId));
+        journeyDetailRepository.deleteByJourneyId(journey.getId());
         journeyRepository.deleteById(journeyId);
         return journeyMapper.journeyToJourneyResponse(journey);
     }
